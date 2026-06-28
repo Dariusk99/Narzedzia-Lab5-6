@@ -2,6 +2,7 @@ import argparse
 import json
 import yaml
 import xmltodict
+import dicttoxml
 
 parser = argparse.ArgumentParser()
 
@@ -94,3 +95,16 @@ def read_xml(path):
     except PermissionError:
         print("Brak uprawnień do pliku XML")
         return None
+
+# Zapis XML
+def save_xml(path, data):
+    try:
+        xml_data = dicttoxml.dicttoxml(data, custom_root="root", attr_type=False)
+
+        with open(path, "wb") as file:
+            file.write(xml_data)
+
+        print("Zapisano dane do pliku XML")
+
+    except PermissionError:
+        print("Brak uprawnień do zapisu pliku XML")
