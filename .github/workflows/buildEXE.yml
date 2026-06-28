@@ -1,5 +1,8 @@
 name: Build exe file
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
@@ -34,3 +37,17 @@ jobs:
         with:
           name: Konwerter
           path: dist/main.exe
+
+      - name: Utworzenie Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Najnowsza wersja
+          body: |
+            Automatycznie zbudowana wersja programu.
+
+            Plik EXE znajduje się poniżej w sekcji Assets.
+          files: dist/main.exe
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
