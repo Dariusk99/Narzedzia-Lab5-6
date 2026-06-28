@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Konwerter
-          path: dist/main.exe
+          path: dist/Konwerter.exe
 
       - name: Utworzenie Release
         uses: softprops/action-gh-release@v2
@@ -47,7 +47,7 @@ jobs:
             Automatycznie zbudowana wersja programu.
 
             Plik EXE znajduje się poniżej w sekcji Assets.
-          files: dist/main.exe
+          files: dist/Konwerter.exe
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
