@@ -1,0 +1,36 @@
+name: Build exe file
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "0 12 * * 1"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Pobranie repozytorium
+        uses: actions/checkout@v4
+
+      - name: Instalacja pythona
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instalacja bibliotek
+        run: ./installResources.ps1
+
+      - name: Budowanie pliku exe
+        run: pyinstaller --onefile --noconsole main.py
+
+      - name: Wysłanie pliku exe jako artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Konwerter
+          path: dist/main.exe
