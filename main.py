@@ -1,6 +1,7 @@
 import argparse
 import json
 import yaml
+import xmltodict
 
 parser = argparse.ArgumentParser()
 
@@ -72,3 +73,24 @@ def save_yaml(path, data):
 
     except PermissionError:
         print("Brak uprawnień do zapisu pliku YAML")
+
+# Wczytanie XML
+def read_xml(path):
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            data = xmltodict.parse(file.read())
+
+        print("Wczytano plik XML")
+        return data
+
+    except FileNotFoundError:
+        print("Plik XML nie istnieje")
+        return None
+
+    except xmltodict.expat.ExpatError:
+        print("Niepoprawna składnia pliku XML")
+        return None
+
+    except PermissionError:
+        print("Brak uprawnień do pliku XML")
+        return None
