@@ -62,3 +62,13 @@ def read_yaml(path):
     except PermissionError:
         print("Brak uprawnień do pliku YAML")
         return None
+
+# Zapis YAML
+def save_yaml(path, data):
+    try:
+        with open(path, "w", encoding="utf-8") as file:
+            yaml.safe_dump(data, file, allow_unicode=True, sort_keys=False)
+        print("Zapisano dane do pliku YAML")
+
+    except PermissionError:
+        print("Brak uprawnień do zapisu pliku YAML")
