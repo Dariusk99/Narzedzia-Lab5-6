@@ -31,3 +31,12 @@ def read_json(path):
     except PermissionError:
         print("Brak uprawnień do pliku JSON")
         return None
+
+# Zapis JSON
+def save_json(path, data):
+    try:
+        with open(path, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
+        print("Zapisano dane do pliku JSON")
+    except PermissionError:
+        print("Brak uprawnień do zapisu pliku JSON")
