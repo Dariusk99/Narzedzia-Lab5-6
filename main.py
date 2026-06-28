@@ -1,5 +1,6 @@
 import argparse
 import json
+import yaml
 
 parser = argparse.ArgumentParser()
 
@@ -40,3 +41,24 @@ def save_json(path, data):
         print("Zapisano dane do pliku JSON")
     except PermissionError:
         print("Brak uprawnień do zapisu pliku JSON")
+
+# Wczytanie YAML
+def read_yaml(path):
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            data = yaml.safe_load(file)
+
+        print("Wczytano plik YAML")
+        return data
+
+    except FileNotFoundError:
+        print("Plik YAML nie istnieje")
+        return None
+
+    except yaml.YAMLError:
+        print("Niepoprawna składnia pliku YAML")
+        return None
+
+    except PermissionError:
+        print("Brak uprawnień do pliku YAML")
+        return None
