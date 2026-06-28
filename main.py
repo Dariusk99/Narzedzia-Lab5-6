@@ -108,3 +108,31 @@ def save_xml(path, data):
 
     except PermissionError:
         print("Brak uprawnień do zapisu pliku XML")
+    
+# Wczytaj plik podany w input argument
+if args.input.endswith(".json"):
+    data = read_json(args.input)
+
+elif args.input.endswith(".yml") or args.input.endswith(".yaml"):
+    data = read_yaml(args.input)
+
+elif args.input.endswith(".xml"):
+    data = read_xml(args.input)
+
+else:
+    print("Nieobsługiwany format pliku wejściowego")
+    data = None
+
+# Zapisz plik podany w output argument
+if data is not None:
+    if args.output.endswith(".json"):
+        save_json(args.output, data)
+
+    elif args.output.endswith(".yml") or args.output.endswith(".yaml"):
+        save_yaml(args.output, data)
+
+    elif args.output.endswith(".xml"):
+        save_xml(args.output, data)
+
+    else:
+        print("Nieobsługiwany format pliku wyjściowego")
